@@ -1,5 +1,6 @@
 package raft
-
+// node manager interface
+// responsible for creating node agent
 type INodeManager interface {
     // set current role
     SetRole(role *IRole)

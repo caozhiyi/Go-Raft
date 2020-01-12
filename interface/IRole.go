@@ -6,6 +6,8 @@ const (
     follower_role  = 3
 )
 
+// role interface
+// leader, follower and candidate common function
 type IRole interface {
     // get current role type
     GetRole() int

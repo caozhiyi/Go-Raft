@@ -4,7 +4,7 @@ const (
     vote_timer  = 0x01
     heart_timer = 0x02
 )
-
+// timer interface
 type ITimer interface {
     // start timer thread
     Start()

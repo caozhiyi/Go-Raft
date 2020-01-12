@@ -1,5 +1,6 @@
 package raft
-
+// node agent interface
+// every connected raft node will create one
 type INode interface {
     // net handle
     SetNetHandle(handle *string) 
