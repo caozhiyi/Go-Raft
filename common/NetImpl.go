@@ -2,21 +2,49 @@ package raft
 
 import (
 	"net"
+	"strconv"
+	"strings"
+	"log"
 )
 
 type net_status struct {
-
+	listener *net.TCPListeners
+	conn_map map[string]*net.TCPConn
+	log log.Logger*
+	conn_chan chan *net.TCPConn
 }
 
 // start to listen
-func (this *net_status) Start(ip string, port uint16) error {
-	
-	net.Listen("tcp", port);
+func (this *net_status) Start(addr string) error {
+	net_status.listener, err := net.Listen("tcp", addr);
+	go func() {
+		for {
+			conn, err := net_status.listener.Accept()
+			if err != nil {
+				log.PrintLn("get a connection err, info : %s", err.String())
+
+			} else {
+				conn_chan <- conn
+			}
+		}
+	}()
+	if err != nil {
+		return err
+	}
+	return nil;
 }
 
 // connect to
-func (this *net_status) ConnectTo(ip string, port uint16) error {
+func (this *net_status) ConnectTo(addr string) error {
+	conn, err := net.Dial("tcp", addr)
+	if err != nil {
+		log.PrintLn("something wrong when connect to %s , info : %s", addr, err.String())
+		return err
 
+	} else {
+		conn_chan <- conn
+	}
+	return nil
 }
 
 // dis connect whit

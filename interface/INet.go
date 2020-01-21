@@ -3,10 +3,10 @@ package raft
 // relize to rpc or other net
 type INet interface {
     // start to listen
-    Start(ip string, port uint16) error
+    Start(addr string) error
 
     // connect to
-    ConnectTo(ip string, port uint16) error
+    ConnectTo(addr string) error
     // dis connect whit
     DisConnect(net_handle string) error
 
