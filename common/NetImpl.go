@@ -5,6 +5,7 @@ import (
 	"strconv"
 	"strings"
 	"log"
+	"errors"
 )
 
 type net_status struct {
@@ -49,7 +50,13 @@ func (this *net_status) ConnectTo(addr string) error {
 
 // dis connect whit
 func (this *net_status) DisConnect(net_handle string) error {
-
+	conn, exist := this.conn_map[net_handle]
+	if !exist {
+		log.PrintLn("can't find the net handle %s when dis connect", net_handle)
+		return errors.New("can't find the net handle")
+	}
+	conn.Close()
+	return nil
 }
 
 // node info
