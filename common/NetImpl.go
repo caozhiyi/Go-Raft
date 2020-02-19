@@ -61,7 +61,11 @@ func (this *net_status) DisConnect(net_handle string) error {
 
 // node info
 func (this *net_status) SendNodeInfoRequest(net_handle string, request *NodeInfoRequest) error {
-	
+	conn, exist := this.conn_map[net_handle]
+	if !exist {
+		log.PrintLn("can't find the net handle %s when send node info request", net_handle)
+		return errors.New("can't find the net handle")
+	}
 }
 
 func (this *net_status) SendNodeInfoResponse(net_handle string, response *NodeInfoResponse) error {
