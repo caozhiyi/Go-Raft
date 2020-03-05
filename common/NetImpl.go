@@ -6,6 +6,7 @@ import (
 	"strings"
 	"log"
 	"errors"
+	"encoding/json"
 )
 
 type net_status struct {
@@ -66,6 +67,13 @@ func (this *net_status) SendNodeInfoRequest(net_handle string, request *NodeInfo
 		log.PrintLn("can't find the net handle %s when send node info request", net_handle)
 		return errors.New("can't find the net handle")
 	}
+	data, err = json.Marshal(NodeInfoRequest);
+	if err != nil {
+		log.PrintLn("parse node info request to json failed. handle: %s", net_handle)
+		return err
+	}
+	conn.Write(data)
+	return nil
 }
 
 func (this *net_status) SendNodeInfoResponse(net_handle string, response *NodeInfoResponse) error {
