@@ -77,7 +77,18 @@ func (this *net_status) SendNodeInfoRequest(net_handle string, request *NodeInfo
 }
 
 func (this *net_status) SendNodeInfoResponse(net_handle string, response *NodeInfoResponse) error {
-	
+	conn, exist := this.conn_map[net_handle]
+	if !exist {
+		log.PrintLn("can't find the net handle %s when send node info response", net_handle)
+		return errors.New("can't find the net handle")
+	}
+	data, err = json.Marshal(NodeInfoResponse);
+	if err != nil {
+		log.PrintLn("parse node info response to json failed. handle: %s", net_handle)
+		return err
+	}
+	conn.Write(data)
+	return nil
 }
 
 // heart beat
