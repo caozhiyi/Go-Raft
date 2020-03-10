@@ -93,29 +93,95 @@ func (this *net_status) SendNodeInfoResponse(net_handle string, response *NodeIn
 
 // heart beat
 func (this *net_status) SendHeartRequest(net_handle string, request *HeartBeatResquest) error {
-	
+	conn, exist := this.conn_map[net_handle]
+	if !exist {
+		log.PrintLn("can't find the net handle %s when send heart request", net_handle)
+		return errors.New("can't find the net handle")
+	}
+	data, err = json.Marshal(NodeInfoResponse);
+	if err != nil {
+		log.PrintLn("parse heart request to json failed. handle: %s", net_handle)
+		return err
+	}
+	conn.Write(data)
+	return nil
 }
 
 func (this *net_status) SendHeartResponse(net_handle string, response *HeartBeatResponse) error {
-	
+	conn, exist := this.conn_map[net_handle]
+	if !exist {
+		log.PrintLn("can't find the net handle %s when send heart response", net_handle)
+		return errors.New("can't find the net handle")
+	}
+	data, err = json.Marshal(NodeInfoResponse);
+	if err != nil {
+		log.PrintLn("parse heart response to json failed. handle: %s", net_handle)
+		return err
+	}
+	conn.Write(data)
+	return nil
 }
 
 // vote
 func (this *net_status) SendVoteRequest(net_handle string, request *VoteRequest) error {
-	
+	conn, exist := this.conn_map[net_handle]
+	if !exist {
+		log.PrintLn("can't find the net handle %s when send vote info request", net_handle)
+		return errors.New("can't find the net handle")
+	}
+	data, err = json.Marshal(NodeInfoResponse);
+	if err != nil {
+		log.PrintLn("parse vote info request to json failed. handle: %s", net_handle)
+		return err
+	}
+	conn.Write(data)
+	return nil
 }
 
 func (this *net_status) SendVoteResponse(net_handle string, response *VoteResponse) error {
-	
+	conn, exist := this.conn_map[net_handle]
+	if !exist {
+		log.PrintLn("can't find the net handle %s when send vote response", net_handle)
+		return errors.New("can't find the net handle")
+	}
+	data, err = json.Marshal(NodeInfoResponse);
+	if err != nil {
+		log.PrintLn("parse vote response to json failed. handle: %s", net_handle)
+		return err
+	}
+	conn.Write(data)
+	return nil
 }
 
 // client about
 func (this *net_status) SendClientRequest(net_handle string, request *ClientRequest) error {
-	
+	conn, exist := this.conn_map[net_handle]
+	if !exist {
+		log.PrintLn("can't find the net handle %s when send client request", net_handle)
+		return errors.New("can't find the net handle")
+	}
+	data, err = json.Marshal(NodeInfoResponse);
+	if err != nil {
+		log.PrintLn("parse client request to json failed. handle: %s", net_handle)
+		return err
+	}
+	conn.Write(data)
+	return nil
 }
 
 func (this *net_status) SendClientResponse(net_handle string, response *ClientResponse) error {
-	
+	conn, exist := this.conn_map[net_handle]
+	if !exist {
+		log.PrintLn("can't find the net handle %s when send client response", net_handle)
+		return errors.New("can't find the net handle")
+	}
+	data, err = json.Marshal(NodeInfoResponse);
+	if err != nil {
+		log.PrintLn("parse client response to json failed. handle: %s", net_handle)
+		return err
+	}
+	conn.Write(data)
+	return nil
 }
 
 // client call back
